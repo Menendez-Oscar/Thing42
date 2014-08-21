@@ -11,7 +11,9 @@ public class Thing42<K, D> extends Pair<K, D> implements Thing42orNull<K, D> {
 	private final long level;
 
 	private LinkedList<Thing42orNull<?,?>> pool;
-	
+	/*
+		peers are stored in a hash map with lists hanging from each value
+	*/
 	private Map<K, List<Thing42orNull<K,?>>> peers;
 	
 	public Thing42(K keyIn, long levelIn, D dataIn) {

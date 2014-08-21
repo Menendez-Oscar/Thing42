@@ -173,21 +173,53 @@ public class Thing42Test {
 		assertTrue(newData.equals(stringThing.getData()));
 
 	}
-
+	/**
+	* returns a new {@code Thing42<String, String>} with 
+	* the following attributes
+	* <ul>
+	*	<li>{@code STRING_KEY}</li>
+	* 	<li>{@code STRING_LEVEL}</li>
+	*	<li>{@code STRING_DATA}</li>
+	* </ul>
+	* @return a new {@code Thing42<String, String>}
+	*/
 	private Thing42<String, String> newStringThing() {
 		return new Thing42<String, String>(STRING_KEY, STRING_LEVEL,
 				STRING_DATA);
 	}
-
+	/**
+	* returns a new {@code Thing42<Integer, Integer>} with 
+	* the following attributes
+	* <ul>
+	*	<li>{@code INTEGER_KEY}</li>
+	* 	<li>{@code INTEGER_LEVEL}</li>
+	*	<li>{@code INTEGER_DATA}</li>
+	* </ul>
+	* @return a new {@code Thing42<Integer, Integer>}
+	*/
 	private Thing42<Integer, Integer> newIntThing() {
 		return new Thing42<Integer, Integer>(INTEGER_KEY, INTEGER_LEVEL,
 				INTEGER_DATA);
 	}
-
+	/**
+	* returns a new {@code Thing42<Boolean, Boolean>} with 
+	* the following attributes
+	* <ul>
+	*	<li>{@code BOOL_KEY}</li>
+	* 	<li>{@code BOOL_LEVEL}</li>
+	*	<li>{@code BOOL_DATA}</li>
+	* </ul>
+	* @return a new {@code Thing42<Boolean, Boolean>}
+	*/
 	private Thing42<Boolean, Boolean> newBoolThing() {
 		return new Thing42<Boolean, Boolean>(BOOL_KEY, BOOL_LEVEL, BOOL_DATA);
 	}
-
+	/**
+	* Adds {@code count} number of peers with arbitrary attributes
+	* of type {@code Thing42<String, String>}
+	* @param stringThing the {@code Thing42} to add the peers to
+	* @param count the number of arbitrary peers to add
+	*/
 	private void addArbitraryPeers(Thing42orNull<String, String> stringThing,
 			int count) {
 		for (int k = 0; k < count; k++) {
