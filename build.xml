@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="test" name="Thing42">
+
+	<property name="src" location="src" />
+	<property name="build" location="bin/classes" />
+	<property name="jar.file" value="${ant.project.name}.jar" />
+	<property name="javadoc.dir" location="doc" />
+
+	<path id="junit.class.path">
+		<fileset dir="lib" includes="*.jar" />
+		<pathelement location="${build}" />
+	</path>
+
+	<target name="doc">
+		<mkdir dir="${javadoc.dir}" />
+		<javadoc sourcepath="${src}" destdir="${javadoc.dir}">
+			<fileset dir="src" defaultexcludes="yes">
+				<include name="**" />
+			</fileset>
+		</javadoc>
+	</target>
+	
+	<target name="tar" depends="test">
+		<tar destfile="./prelim.tar" basedir="." excludes=".git/**, .gitignore/**, .settings/**, .project/**, .classpath/**, result.txt" />
+	</target>
+
+	<target name="jar" depends="test">
+		<delete file="{$jar.file}" />
+		<jar destfile="${jar.file}" basedir="${build}">
+		</jar>
+	</target>
+
+	<target name="test" depends="compile">
+		<junit printsummary="yes" haltonfailure="yes" showoutput="yes">
+			<classpath>
+				<path refid="junit.class.path" />
+			</classpath>
+
+			<test name="Thing42Test" haltonfailure="no" outfile="result">
+				<formatter type="plain" />
+			</test>
+		</junit>
+	</target>
+
+	<target name="compile" depends="clean">
+		<mkdir dir="${build}" />
+		<javac includeantruntime="false" srcdir="${src}" destdir="${build}" classpathref="junit.class.path" />
+	</target>
+
+	<target name="clean">
+		<delete dir="build" />
+	</target>
+</project>
