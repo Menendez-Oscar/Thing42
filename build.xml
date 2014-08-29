@@ -13,7 +13,7 @@
 
 	<target name="doc">
 		<mkdir dir="${javadoc.dir}" />
-		<javadoc sourcepath="${src}" destdir="${javadoc.dir}">
+		<javadoc sourcepath="${src}" destdir="${javadoc.dir}" classpathref="junit.class.path">
 			<fileset dir="src" defaultexcludes="yes">
 				<include name="**" />
 			</fileset>

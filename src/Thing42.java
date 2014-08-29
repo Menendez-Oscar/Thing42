@@ -1,26 +1,53 @@
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Thing42<K, D> extends Pair<K, D> implements Thing42orNull<K, D> {
+public class Thing42<K, D> implements Thing42orNull<K, D> {
 	
 	public static final String NPE_MESSAGE = "Argument cannot be null";
 
+	private D data;
+
+	private final K key;
+
 	private final long level;
 
-	private LinkedList<Thing42orNull<?,?>> pool;
+	private ArrayList<Thing42orNull<?,?>> pool;
 	/*
 		peers are stored in a hash map with lists hanging from each value
 	*/
-	private Map<K, List<Thing42orNull<K,?>>> peers;
+	private Map<K, LinkedList<Thing42orNull<K,?>>> peers;
 	
 	public Thing42(K keyIn, long levelIn, D dataIn) {
-		super(keyIn, dataIn);
+		this.key = keyIn;
+		this.data = dataIn;
 		this.level = levelIn;
-		this.pool = new LinkedList<Thing42orNull<?,?>>();
-		this.peers = new HashMap<K, List<Thing42orNull<K,?>>>();
+		this.pool = new ArrayList<Thing42orNull<?,?>>();
+		this.peers = new HashMap<K, LinkedList<Thing42orNull<K,?>>>();
+	}
+	/**
+	 * Gets the data
+	 * @return the data
+	 */
+	public D getData() {
+		return this.data;
+	}
+	/**
+	 * Gets the key
+	 * @return the key
+	 */
+	public K getKey() {
+		return this.key;
+	}
+	/**
+	 * Sets the data
+	 * @param newData the new data
+	 */
+	public void setData(D newData) {
+		this.data = newData;
 	}
 
 	@Override
@@ -30,13 +57,13 @@ public class Thing42<K, D> extends Pair<K, D> implements Thing42orNull<K, D> {
 		if (this.peers.get(key) == null) {
 			this.peers.put(key, new LinkedList<Thing42orNull<K,?>>());
 		}
-		this.peers.get(key).add(newPeer);
+		this.peers.get(key).addFirst(newPeer);
 	}
 
 	@Override
 	public void appendToPool(Thing42orNull<?,?> newMember) {
 		nullCheck(newMember);
-		this.pool.addLast(newMember);
+		this.pool.add(newMember);
 	}
 
 	@Override
@@ -57,7 +84,7 @@ public class Thing42<K, D> extends Pair<K, D> implements Thing42orNull<K, D> {
 	@Override
 	public Collection<Thing42orNull<K, ?>> getPeersAsCollection() {
 		List<Thing42orNull<K,?>> retValue = new LinkedList<Thing42orNull<K,?>>();
-		Collection<List<Thing42orNull<K, ?>>> lists = this.peers.values();
+		Collection<LinkedList<Thing42orNull<K, ?>>> lists = this.peers.values();
 		for (Collection<Thing42orNull<K,?>> list : lists) {
 			retValue.addAll(list);
 		}

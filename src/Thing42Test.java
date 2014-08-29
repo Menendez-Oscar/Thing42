@@ -1,5 +1,6 @@
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.Collection;
 import java.util.List;
@@ -29,6 +30,12 @@ public class Thing42Test {
 		Thing42orNull<String, ?> peer = (Thing42orNull<String, ?>) stringThing
 				.getOnePeer(stringThing2.getKey());
 		assertTrue(peer == stringThing2); // same object
+		try {
+			stringThing.addPeer(null);
+			fail(Thing42.NPE_MESSAGE);
+		} catch (NullPointerException e) {
+
+		}
 	}
 
 	@Test
@@ -41,6 +48,12 @@ public class Thing42Test {
 
 		assertTrue(stringThing.equals(stringThing2.getPoolAsList().get(0)));
 		assertTrue(stringThing2.equals(stringThing.getPoolAsList().get(0)));
+		try {
+			stringThing.addPeer(null);
+			fail(Thing42.NPE_MESSAGE);
+		} catch (NullPointerException e) {
+
+		}
 
 	}
 
@@ -151,6 +164,12 @@ public class Thing42Test {
 		stringThing.removeFromPool(stringThing2);
 
 		assertTrue(stringThing.getPoolAsList().size() == 0);
+		try {
+			stringThing.addPeer(null);
+			fail(Thing42.NPE_MESSAGE);
+		} catch (NullPointerException e) {
+
+		}
 	}
 
 	@Test
@@ -162,6 +181,12 @@ public class Thing42Test {
 				.getOnePeer(stringThing2.getKey());
 		stringThing.removePeer(peer);
 		assertTrue(stringThing.getPeersAsCollection().size() == 0);
+		try {
+			stringThing.addPeer(null);
+			fail(Thing42.NPE_MESSAGE);
+		} catch (NullPointerException e) {
+
+		}
 	}
 
 	@Test
