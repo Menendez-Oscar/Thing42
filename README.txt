@@ -1,4 +1,4 @@
-Guy Grigsby
+
 Thing42orNull assignment
 CS 4250
 
