@@ -24,7 +24,6 @@ public class Thing42Test {
 
 	@Test
 	public void testAddPeer() {
-                fail("test fail");
                 Thing42orNull<String, String> stringThing = newStringThing();
 		Thing42orNull<String, String> stringThing2 = newStringThing();
 		stringThing.addPeer(stringThing2);
