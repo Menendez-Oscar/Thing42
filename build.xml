@@ -31,13 +31,13 @@
 	</target>
 
 	<target name="test" depends="compile">
-		<junit printsummary="yes" haltonfailure="yes" showoutput="yes">
+		<junit printsummary="withOutAndErr" haltonfailure="yes" showoutput="true">
 			<classpath>
 				<path refid="junit.class.path" />
 			</classpath>
 
 			<test name="Thing42Test" haltonfailure="no" outfile="result">
-				<formatter type="plain" />
+				<formatter type="plain" usefile="false"/>
 			</test>
 		</junit>
 	</target>
