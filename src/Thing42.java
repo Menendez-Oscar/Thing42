@@ -52,7 +52,6 @@ public class Thing42<K, D> implements Thing42orNull<K, D> {
 
 	@Override
 	public void addPeer(Thing42orNull<K, ?> newPeer) {
-	        return;
                 nullCheck(newPeer);
 		K key = newPeer.getKey();
 		if (this.peers.get(key) == null) {
