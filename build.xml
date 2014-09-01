@@ -21,7 +21,7 @@
 	</target>
 	
 	<target name="tar" depends="test">
-		<tar destfile="./prelim.tar" basedir="." excludes=".git/**, .gitignore/**, .settings/**, .project/**, .classpath/**, result.txt" />
+		<tar destfile="./prelim.tar" basedir="." excludes=".git/**, .gitignore/**, .settings/**, .project/**, .classpath/**, result.txt, .travis.yml" />
 	</target>
 
 	<target name="jar" depends="test">

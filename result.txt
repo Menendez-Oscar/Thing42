@@ -1,5 +1,5 @@
 Testsuite: Thing42Test
-Tests run: 12, Failures: 0, Errors: 0, Time elapsed: 0.013 sec
+Tests run: 12, Failures: 0, Errors: 0, Time elapsed: 0.014 sec
 
 Testcase: testAppendToPool took 0.001 sec
 Testcase: testGetLevel took 0 sec
@@ -11,5 +11,5 @@ Testcase: testRemovePeer took 0 sec
 Testcase: testGetKey took 0 sec
 Testcase: testGetPeersAsCollection took 0.001 sec
 Testcase: testGetPeersAsCollectionGivenKey took 0 sec
-Testcase: testGetPoolAsList took 0 sec
+Testcase: testGetPoolAsList took 0.001 sec
 Testcase: testSetData took 0 sec
