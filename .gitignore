@@ -1,4 +1,6 @@
 /.classpath
 /.project
 bin/*
+doc/*
 result.txt
+prelim.tar
