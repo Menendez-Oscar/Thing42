@@ -21,8 +21,8 @@ public class Thing42<K, D> implements Thing42orNull<K, D> {
 	private D data;
 	private final K key;
 	private final long level;
-	private ArrayList<Thing42orNull<?, ?>> pool;
-	private Map<K, LinkedList<Thing42orNull<K, ?>>> peers;
+	private ArrayList<Thing42orNull<K, D>> pool;
+	private Map<K, LinkedList<Thing42orNull<K, D>>> peers;
 
 	/**
 	 * Default constructor
@@ -35,8 +35,8 @@ public class Thing42<K, D> implements Thing42orNull<K, D> {
 		this.key = keyIn;
 		this.data = dataIn;
 		this.level = levelIn;
-		this.pool = new ArrayList<Thing42orNull<?, ?>>();
-		this.peers = new HashMap<K, LinkedList<Thing42orNull<K, ?>>>();
+		this.pool = new ArrayList<Thing42orNull<K, D>>();
+		this.peers = new HashMap<K, LinkedList<Thing42orNull<K, D>>>();
 	}
 
 	/**
@@ -72,11 +72,11 @@ public class Thing42<K, D> implements Thing42orNull<K, D> {
 	 * 
 	 * @param newPeer
 	 */
-	public void addPeer(Thing42orNull<K, ?> newPeer) {
+	public void addPeer(Thing42orNull<K, D> newPeer) {
 		nullCheck(newPeer);
 		K key = newPeer.getKey();
 		if (this.peers.get(key) == null) {
-			this.peers.put(key, new LinkedList<Thing42orNull<K, ?>>());
+			this.peers.put(key, new LinkedList<Thing42orNull<K, D>>());
 		}
 		this.peers.get(key).addFirst(newPeer);
 	}
@@ -86,7 +86,7 @@ public class Thing42<K, D> implements Thing42orNull<K, D> {
 	 * 
 	 * @param newMember
 	 */
-	public void appendToPool(Thing42orNull<?, ?> newMember) {
+	public void appendToPool(Thing42orNull<K, D> newMember) {
 		nullCheck(newMember);
 		this.pool.add(newMember);
 	}
@@ -107,9 +107,9 @@ public class Thing42<K, D> implements Thing42orNull<K, D> {
 	 * @param key
 	 * @return {@link Thing42orNull} or null if not found
 	 */
-	public Thing42orNull<K, ?> getOnePeer(K key) {
-		Thing42orNull<K, ?> one = null;
-		List<Thing42orNull<K, ?>> matchingKeys = this.peers.get(key);
+	public Thing42orNull<K, D> getOnePeer(K key) {
+		Thing42orNull<K, D> one = null;
+		List<Thing42orNull<K, D>> matchingKeys = this.peers.get(key);
 		if (matchingKeys != null && matchingKeys.size() > 0) {
 			one = matchingKeys.get(0);
 		}
@@ -123,10 +123,10 @@ public class Thing42<K, D> implements Thing42orNull<K, D> {
 	 *         java.util.LinkedList.LinkedList} containing all peer
 	 *         {@link Thing42orNull}
 	 */
-	public Collection<Thing42orNull<K, ?>> getPeersAsCollection() {
-		List<Thing42orNull<K, ?>> retValue = new LinkedList<Thing42orNull<K, ?>>();
-		Collection<LinkedList<Thing42orNull<K, ?>>> lists = this.peers.values();
-		for (Collection<Thing42orNull<K, ?>> list : lists) {
+	public Collection<Thing42orNull<K, D>> getPeersAsCollection() {
+		List<Thing42orNull<K, D>> retValue = new LinkedList<Thing42orNull<K, D>>();
+		Collection<LinkedList<Thing42orNull<K, D>>> lists = this.peers.values();
+		for (Collection<Thing42orNull<K, D>> list : lists) {
 			retValue.addAll(list);
 		}
 
@@ -141,16 +141,16 @@ public class Thing42<K, D> implements Thing42orNull<K, D> {
 	 *         java.util.LinkedList.LinkedList} containing all peer
 	 *         {@link Thing42orNull} that match the key.
 	 */
-	public Collection<Thing42orNull<K, ?>> getPeersAsCollection(Object key) {
-		Collection<Thing42orNull<K, ?>> mpeers = this.peers.get(key);
-		return mpeers == null ? new LinkedList<Thing42orNull<K, ?>>() : mpeers;
+	public Collection<Thing42orNull<K, D>> getPeersAsCollection(Object key) {
+		Collection<Thing42orNull<K, D>> mpeers = this.peers.get(key);
+		return mpeers == null ? new LinkedList<Thing42orNull<K, D>>() : mpeers;
 	}
 
 	/**
 	 * 
 	 * @return
 	 */
-	public List<Thing42orNull<?, ?>> getPoolAsList() {
+	public List<Thing42orNull<K, D>> getPoolAsList() {
 		return this.pool;
 	}
 
@@ -161,7 +161,7 @@ public class Thing42<K, D> implements Thing42orNull<K, D> {
 	 *            {@link Thing42orNull} to be removed
 	 * @return {@code true} if found and removed, otherwise {@code false}
 	 */
-	public boolean removeFromPool(Thing42orNull<?, ?> member) {
+	public boolean removeFromPool(Thing42orNull<K, D> member) {
 		nullCheck(member);
 		return this.pool.remove(member);
 	}
@@ -173,7 +173,7 @@ public class Thing42<K, D> implements Thing42orNull<K, D> {
 	 *            {@link Thing42orNull} to be removed.
 	 * @return {@code true} if found and removed, otherwise {@code false}
 	 */
-	public boolean removePeer(Thing42orNull<K, ?> peer) {
+	public boolean removePeer(Thing42orNull<K, D> peer) {
 		nullCheck(peer);
 		return this.peers.get(peer.getKey()).remove(peer);
 	}
@@ -210,7 +210,7 @@ public class Thing42<K, D> implements Thing42orNull<K, D> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Thing42<?, ?> other = (Thing42<?, ?>) obj;
+		Thing42<K, D> other = (Thing42<K, D>) obj;
 		if (level != other.level)
 			return false;
 		if (peers == null) {
