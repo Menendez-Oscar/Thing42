@@ -210,7 +210,7 @@ public class Thing42<K, D> implements Thing42orNull<K, D> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Thing42<K, D> other = (Thing42<K, D>) obj;
+		Thing42<?, ?> other = (Thing42<?, ?>) obj;
 		if (level != other.level)
 			return false;
 		if (peers == null) {

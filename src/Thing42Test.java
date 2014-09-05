@@ -27,7 +27,7 @@ public class Thing42Test {
                 Thing42orNull<String, String> stringThing = newStringThing();
 		Thing42orNull<String, String> stringThing2 = newStringThing();
 		stringThing.addPeer(stringThing2);
-		Thing42orNull<String, String> peer = (Thing42orNull<String, String>) stringThing
+		Thing42orNull<String, String> peer = stringThing
 				.getOnePeer(stringThing2.getKey());
 		assertTrue(peer == stringThing2); // same object
 		try {
