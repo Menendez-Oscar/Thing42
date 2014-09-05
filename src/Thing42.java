@@ -44,6 +44,7 @@ public class Thing42<K, D> implements Thing42orNull<K, D> {
 	 * 
 	 * @return the data
 	 */
+        @Override
 	public D getData() {
 		return this.data;
 	}
@@ -53,6 +54,7 @@ public class Thing42<K, D> implements Thing42orNull<K, D> {
 	 * 
 	 * @return the key
 	 */
+        @Override
 	public K getKey() {
 		return this.key;
 	}
@@ -63,6 +65,7 @@ public class Thing42<K, D> implements Thing42orNull<K, D> {
 	 * @param newData
 	 *            the new data
 	 */
+        @Override
 	public void setData(D newData) {
 		this.data = newData;
 	}
@@ -72,6 +75,7 @@ public class Thing42<K, D> implements Thing42orNull<K, D> {
 	 * 
 	 * @param newPeer
 	 */
+        @Override
 	public void addPeer(Thing42orNull<K, D> newPeer) {
 		nullCheck(newPeer);
 		K key = newPeer.getKey();
@@ -86,6 +90,7 @@ public class Thing42<K, D> implements Thing42orNull<K, D> {
 	 * 
 	 * @param newMember
 	 */
+        @Override
 	public void appendToPool(Thing42orNull<K, D> newMember) {
 		nullCheck(newMember);
 		this.pool.add(newMember);
@@ -96,6 +101,7 @@ public class Thing42<K, D> implements Thing42orNull<K, D> {
 	 * 
 	 * @return level
 	 */
+        @Override
 	public long getLevel() {
 		return this.level;
 	}
@@ -107,6 +113,7 @@ public class Thing42<K, D> implements Thing42orNull<K, D> {
 	 * @param key
 	 * @return {@link Thing42orNull} or null if not found
 	 */
+        @Override
 	public Thing42orNull<K, D> getOnePeer(K key) {
 		Thing42orNull<K, D> one = null;
 		List<Thing42orNull<K, D>> matchingKeys = this.peers.get(key);
@@ -123,6 +130,7 @@ public class Thing42<K, D> implements Thing42orNull<K, D> {
 	 *         java.util.LinkedList.LinkedList} containing all peer
 	 *         {@link Thing42orNull}
 	 */
+        @Override
 	public Collection<Thing42orNull<K, D>> getPeersAsCollection() {
 		List<Thing42orNull<K, D>> retValue = new LinkedList<Thing42orNull<K, D>>();
 		Collection<LinkedList<Thing42orNull<K, D>>> lists = this.peers.values();
@@ -141,6 +149,7 @@ public class Thing42<K, D> implements Thing42orNull<K, D> {
 	 *         java.util.LinkedList.LinkedList} containing all peer
 	 *         {@link Thing42orNull} that match the key.
 	 */
+        @Override
 	public Collection<Thing42orNull<K, D>> getPeersAsCollection(Object key) {
 		Collection<Thing42orNull<K, D>> mpeers = this.peers.get(key);
 		return mpeers == null ? new LinkedList<Thing42orNull<K, D>>() : mpeers;
@@ -150,6 +159,7 @@ public class Thing42<K, D> implements Thing42orNull<K, D> {
 	 * 
 	 * @return
 	 */
+        @Override
 	public List<Thing42orNull<K, D>> getPoolAsList() {
 		return this.pool;
 	}
@@ -161,6 +171,7 @@ public class Thing42<K, D> implements Thing42orNull<K, D> {
 	 *            {@link Thing42orNull} to be removed
 	 * @return {@code true} if found and removed, otherwise {@code false}
 	 */
+        @Override
 	public boolean removeFromPool(Thing42orNull<K, D> member) {
 		nullCheck(member);
 		return this.pool.remove(member);
@@ -173,6 +184,7 @@ public class Thing42<K, D> implements Thing42orNull<K, D> {
 	 *            {@link Thing42orNull} to be removed.
 	 * @return {@code true} if found and removed, otherwise {@code false}
 	 */
+        @Override
 	public boolean removePeer(Thing42orNull<K, D> peer) {
 		nullCheck(peer);
 		return this.peers.get(peer.getKey()).remove(peer);
