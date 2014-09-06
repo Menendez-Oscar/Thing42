@@ -44,7 +44,9 @@
 
 	<target name="compile" depends="clean">
 		<mkdir dir="${build}" />
-		<javac includeantruntime="false" srcdir="${src}" destdir="${build}" classpathref="junit.class.path" />
+              <javac includeantruntime="false" srcdir="${src}" destdir="${build}" classpathref="junit.class.path">
+                  <compilerarg value="-Xlint"/>
+              </javac>
 	</target>
 
 	<target name="clean">

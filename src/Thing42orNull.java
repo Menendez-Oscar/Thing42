@@ -1,11 +1,15 @@
 import java.util.List;
 import java.util.Collection;
 
-public interface Thing42orNull<K, D> { 
-	
-	public void addPeer(Thing42orNull<K, ?> newPeer);
+public interface Thing42orNull<K, D> {
 
-	public void appendToPool(Thing42orNull<?,?> newMember);
+	public void addPeer(Thing42orNull<K, D> newPeer)
+			throws NullPointerException;
+
+	public void appendToPool(Thing42orNull<K, D> newMember)
+			throws NullPointerException;
+
+	boolean equals(Object obj);
 
 	public D getData();
 
@@ -13,17 +17,21 @@ public interface Thing42orNull<K, D> {
 
 	public long getLevel();
 
-	public Thing42orNull<K, ?> getOnePeer(K key);
+	public Thing42orNull<K, D> getOnePeer(K key);
 
-	public Collection<Thing42orNull<K, ?>> getPeersAsCollection();
+	public Collection<Thing42orNull<K, D>> getPeersAsCollection();
 
-	public Collection<Thing42orNull<K, ?>> getPeersAsCollection(K key);
+	public Collection<Thing42orNull<K, D>> getPeersAsCollection(K key);
 
-	public List<Thing42orNull<?, ?>> getPoolAsList();
+	public List<Thing42orNull<K, D>> getPoolAsList();
 
-	public boolean removeFromPool(Thing42orNull<?, ?> member);
+	public int hashCode();
 
-	public boolean removePeer(Thing42orNull<K, ?> peer);
+	public boolean removeFromPool(Thing42orNull<K, D> member)
+			throws NullPointerException;
+
+	public boolean removePeer(Thing42orNull<K, D> peer)
+			throws NullPointerException;
 
 	public void setData(D newData);
 }

@@ -1,6 +1,4 @@
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import java.util.Collection;
 import java.util.List;
@@ -27,7 +25,7 @@ public class Thing42Test {
                 Thing42orNull<String, String> stringThing = newStringThing();
 		Thing42orNull<String, String> stringThing2 = newStringThing();
 		stringThing.addPeer(stringThing2);
-		Thing42orNull<String, ?> peer = (Thing42orNull<String, ?>) stringThing
+		Thing42orNull<String, String> peer = stringThing
 				.getOnePeer(stringThing2.getKey());
 		assertTrue(peer == stringThing2); // same object
 		try {
@@ -102,7 +100,7 @@ public class Thing42Test {
 		stringThing.addPeer(stringThing2);
 		stringThing.addPeer(new Thing42<String, String>("", 0, ""));
 		addArbitraryPeers(stringThing, 25);
-		Thing42orNull<String, ?> peer = stringThing
+		Thing42orNull<String, String> peer = stringThing
 				.getOnePeer(stringThing2.getKey());
 		assertTrue(peer == stringThing2); // same object
 	}
@@ -130,7 +128,7 @@ public class Thing42Test {
 				stringThing.addPeer(new Thing42<String,String>(""+k, k, "data "+k));
 			}
 		}
-		Collection<Thing42orNull<String,?>> coll = stringThing.getPeersAsCollection(savedKey); 
+		Collection<Thing42orNull<String,String>> coll = stringThing.getPeersAsCollection(savedKey); 
 		assertTrue(coll.size() == (count/modForMatch));
 	}
 
@@ -142,7 +140,7 @@ public class Thing42Test {
 			stringThing.appendToPool(new Thing42<String, String>("key " + k,
 					(long) k, "data " + k));
 		}
-		List<Thing42orNull<?, ?>> pool = stringThing.getPoolAsList();
+		List<Thing42orNull<String, String>> pool = stringThing.getPoolAsList();
 		assertTrue(pool.size() == count);
 		for (int k = 0; k < count; k++) {
 			assertTrue(pool.get(k).getKey().equals("key " + k));
@@ -177,7 +175,7 @@ public class Thing42Test {
 		Thing42orNull<String, String> stringThing = newStringThing();
 		Thing42orNull<String, String> stringThing2 = newStringThing();
 		stringThing.addPeer(stringThing2);
-		Thing42orNull<String, ?> peer = stringThing
+		Thing42orNull<String, String> peer = stringThing
 				.getOnePeer(stringThing2.getKey());
 		stringThing.removePeer(peer);
 		assertTrue(stringThing.getPeersAsCollection().size() == 0);
@@ -198,6 +196,16 @@ public class Thing42Test {
 		assertTrue(newData.equals(stringThing.getData()));
 
 	}
+
+    @Test
+    public void testHashCodeAndEquals() {
+        Thing42orNull<String, String> stringThing = newStringThing();
+        Thing42orNull<String, String> stringThing2 = newStringThing();
+        assertEquals("Hashcodes match", stringThing.hashCode(), stringThing.hashCode());
+        assertTrue("Object equals self", stringThing.equals(stringThing));
+        assertFalse("Object does not equal another object", stringThing.equals(stringThing2));
+    }
+
 	/**
 	* returns a new {@code Thing42<String, String>} with 
 	* the following attributes
