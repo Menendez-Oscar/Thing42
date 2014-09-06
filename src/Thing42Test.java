@@ -1,6 +1,4 @@
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import java.util.Collection;
 import java.util.List;
@@ -198,6 +196,16 @@ public class Thing42Test {
 		assertTrue(newData.equals(stringThing.getData()));
 
 	}
+
+    @Test
+    public void testHashCodeAndEquals() {
+        Thing42orNull<String, String> stringThing = newStringThing();
+        Thing42orNull<String, String> stringThing2 = newStringThing();
+        assertEquals("Hashcodes match", stringThing.hashCode(), stringThing.hashCode());
+        assertTrue("Object equals self", stringThing.equals(stringThing));
+        assertFalse("Object does not equal another object", stringThing.equals(stringThing2));
+    }
+
 	/**
 	* returns a new {@code Thing42<String, String>} with 
 	* the following attributes
